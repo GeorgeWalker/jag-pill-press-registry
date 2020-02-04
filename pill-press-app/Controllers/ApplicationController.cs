@@ -1096,7 +1096,13 @@ namespace Gov.Jag.PillPressRegistry.Public.Controllers
                     }
                 }
 
-                relativeUrl = account.GetServerUrl(_sharePointFileManager);
+                    string serverRelativeUrl = "";
+
+                    if (! string.IsNullOrEmpty(_sharePointFileManager.WebName))
+                    {
+                        serverRelativeUrl += "/sites/" + _sharePointFileManager.WebName;
+                    }
+                    serverRelativeUrl += "/" + _sharePointFileManager.GetServerRelativeURL(SharePointFileManager.AccountDocumentListTitle, account.GetSharePointFolderName() + $"/{filePrefix}{certificateName}.pdf");
 
 
                 relativeUrl += $"/{filePrefix}{certificateName}.pdf";
